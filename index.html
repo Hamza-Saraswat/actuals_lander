@@ -7,7 +7,12 @@
 <meta name="description" content="A free Claude Code plugin that designs business-outcome metrics for your AI tools, audits dashboards against 20 named vanity-metric anti-patterns, and generates the instrumentation.">
 <meta name="theme-color" content="#0a0b10">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%238b5cf6'/%3E%3Cstop offset='1' stop-color='%232dd4bf'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='%230a0b10'/%3E%3Cpath d='M8 17.5 L14 23 L24 9' stroke='url(%23g)' stroke-width='3.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-<script>document.documentElement.classList.add('js')</script>
+<script>
+(function(){var d=document.documentElement;d.classList.add('js');var t=null;
+try{t=localStorage.getItem('actuals-theme')}catch(e){}
+if(t!=='light'&&t!=='dark'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}
+d.dataset.theme=t})();
+</script>
 <style>
 :root{
   --bg:#0a0b10; --bg2:#0d0f16;
@@ -21,11 +26,21 @@
   --sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Inter,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
 }
+/* ---------- light theme ---------- */
+[data-theme="light"]{
+  --bg:#f5f6fa; --bg2:#ffffff;
+  --panel:#ffffff; --panel-solid:#ffffff;
+  --line:rgba(18,22,40,.1); --line-soft:rgba(18,22,40,.06);
+  --ink:#151827; --mut:#5c6374; --dim:#8b91a3;
+  --violet:#7c3aed; --blue:#2563eb; --teal:#0d9488; --red:#d64b3f; --green:#0f9d6a; --amber:#b97b17;
+  --grad:linear-gradient(92deg,#7c3aed 0%,#2563eb 45%,#0d9488 100%);
+}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
   background:var(--bg); color:var(--ink); font-family:var(--sans);
   font-size:16.5px; line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  transition:background .25s,color .25s;
 }
 /* atmosphere: glows + plus-grid */
 .atmo{position:fixed;inset:0;z-index:-1;pointer-events:none}
@@ -39,6 +54,15 @@ body{
 .atmo::after{
   content:"";position:absolute;inset:0;opacity:.5;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44'%3E%3Cpath d='M22 18v8M18 22h8' stroke='rgba(255,255,255,0.045)' stroke-width='1'/%3E%3C/svg%3E");
+}
+[data-theme="light"] .atmo::before{
+  background:
+    radial-gradient(52rem 34rem at 12% -6%, rgba(124,58,237,.09), transparent 60%),
+    radial-gradient(46rem 30rem at 96% 12%, rgba(13,148,136,.08), transparent 60%),
+    radial-gradient(40rem 30rem at 50% 115%, rgba(37,99,235,.06), transparent 65%);
+}
+[data-theme="light"] .atmo::after{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44'%3E%3Cpath d='M22 18v8M18 22h8' stroke='rgba(18,22,40,0.05)' stroke-width='1'/%3E%3C/svg%3E");
 }
 .wrap{max-width:1120px;margin:0 auto;padding:0 1.5rem}
 a{color:inherit}
@@ -222,6 +246,46 @@ footer .row{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;c
 footer a{color:var(--mut);text-decoration:none}
 footer a:hover{color:var(--ink)}
 
+/* ---------- theme-dependent component overrides ---------- */
+.t-n{background:rgba(255,255,255,.06);border:1px solid var(--line)}
+.dir-v{color:#a78bfa}.dir-b{color:#7aa5ff}.dir-t{color:#7ee7d8}
+.code{background:#0b0c12}
+.code .bar{border-bottom:1px solid rgba(255,255,255,.06)}
+.code .bar span{color:#6b7285}
+[data-theme="light"] nav{background:rgba(245,246,250,.75)}
+[data-theme="light"] .badge,[data-theme="light"] .chip{background:#fff}
+[data-theme="light"] .toolrow{background:rgba(255,255,255,.6)}
+[data-theme="light"] .card{box-shadow:0 1px 2px rgba(18,22,40,.04)}
+[data-theme="light"] .card:hover{background:#fff;box-shadow:0 14px 34px rgba(18,22,40,.1)}
+[data-theme="light"] .btn-ghost{background:#fff;border-color:rgba(18,22,40,.14)}
+[data-theme="light"] .btn-ghost:hover{background:#fff;border-color:rgba(18,22,40,.28)}
+[data-theme="light"] .checks li{color:#3d4356}
+[data-theme="light"] .tag.v{color:#6d28d9;border-color:rgba(124,58,237,.35);background:rgba(124,58,237,.08)}
+[data-theme="light"] .tag.t{color:#0f766e;border-color:rgba(13,148,136,.35);background:rgba(13,148,136,.08)}
+[data-theme="light"] .way.glow{border-color:rgba(124,58,237,.3);background:linear-gradient(180deg,rgba(124,58,237,.05),#fff)}
+[data-theme="light"] .kicker.v{color:#7c3aed}
+[data-theme="light"] .kicker.b{color:#2563eb}
+[data-theme="light"] .t-n{background:rgba(18,22,40,.06);border-color:rgba(18,22,40,.1)}
+[data-theme="light"] .dir-v{color:#7c3aed}
+[data-theme="light"] .dir-b{color:#2563eb}
+[data-theme="light"] .dir-t{color:#0d9488}
+[data-theme="light"] .code{border-color:rgba(18,22,40,.2);box-shadow:0 12px 30px rgba(18,22,40,.14)}
+[data-theme="light"] .vm{color:#b8362b;border-color:rgba(198,60,46,.45);background:rgba(198,60,46,.06)}
+[data-theme="light"] .lrow .now{color:#3d4356}
+[data-theme="light"] .pat .id{color:#b8362b}
+[data-theme="light"] .honest{border-color:rgba(13,148,136,.3);background:linear-gradient(180deg,rgba(13,148,136,.05),#fff)}
+[data-theme="light"] .honest a{color:#0f766e;border-bottom-color:rgba(13,148,136,.4)}
+
+/* theme toggle */
+.mode{
+  width:38px;height:38px;border-radius:11px;border:1px solid var(--line);background:rgba(255,255,255,.04);
+  color:var(--ink);font-size:1rem;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;
+  transition:border-color .18s,background .18s
+}
+.mode:hover{border-color:rgba(255,255,255,.25)}
+[data-theme="light"] .mode{background:#fff}
+[data-theme="light"] .mode:hover{border-color:rgba(18,22,40,.3)}
+
 /* reveal animation (fail-open: only hides when JS is present) */
 .js .rv{opacity:0;transform:translateY(22px) scale(.985);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.75,.25,1)}
 .js .rv.in{opacity:1;transform:none}
@@ -241,6 +305,7 @@ footer a:hover{color:var(--ink)}
       <a href="#catalog">Catalog</a>
       <a href="#install">Install</a>
       <a class="gh" href="https://github.com/Hamza-Saraswat/actuals">GitHub <span>↗</span></a>
+      <button class="mode" id="mode" aria-label="Toggle light and dark theme">☾</button>
     </div>
   </div>
 </nav>
@@ -284,7 +349,7 @@ footer a:hover{color:var(--ink)}
       <div class="card rv d2"><div class="tile t-b">⚙</div><h3>/actuals:instrument</h3><p>Events with typed constants, SQL/dbt models implementing each formula verbatim, a pre-launch baseline snapshot, and an eval harness with judge–human calibration built in.</p></div>
       <div class="card rv d3"><div class="tile t-t">⛓</div><h3>/actuals:connect</h3><p>Vetted MCP configs for the tools you already run — merged into your project non-destructively. Secrets stay as env-var placeholders you export yourself.</p></div>
       <div class="card rv d4"><div class="tile t-a">▦</div><h3>/actuals:scorecard</h3><p>A self-contained dashboard.html — metrics vs baselines and targets, tripwires, open findings, the claims ledger. Renders recorded values only, and says so.</p></div>
-      <div class="card rv d5"><div class="tile" style="background:rgba(255,255,255,.06);border:1px solid var(--line)">↻</div><h3>then: re-audit monthly</h3><p>The audit's review mode checks spec drift, definition rot, stale owners, and overdue calibrations — the maintenance loop that keeps the spec from becoming the thing it replaced.</p></div>
+      <div class="card rv d5"><div class="tile t-n">↻</div><h3>then: re-audit monthly</h3><p>The audit's review mode checks spec drift, definition rot, stale owners, and overdue calibrations — the maintenance loop that keeps the spec from becoming the thing it replaced.</p></div>
     </div>
   </div>
 </section>
@@ -400,19 +465,19 @@ footer a:hover{color:var(--ink)}
     </div>
     <div class="stack">
       <div class="card lane rv">
-        <div class="dir" style="color:#a78bfa">Data in</div>
+        <div class="dir dir-v">Data in</div>
         <h3>Connect what you run</h3>
         <p>A curated, verified MCP registry — written into <em>your</em> config on your confirmation. Env-var placeholders only, never literal keys.</p>
         <div class="chips"><span>16 verified vendors</span><span>non-destructive merge</span></div>
       </div>
       <div class="card lane rv d1">
-        <div class="dir" style="color:#7aa5ff">Definitions out</div>
+        <div class="dir dir-b">Definitions out</div>
         <h3>Your BI does the computing</h3>
         <p>Instrument publishes metric <em>definitions</em> as PostHog insights and dashboards — your data carries the live numbers, the spec stays the source of truth.</p>
         <div class="chips"><span>PostHog dashboards</span><span>SQL / dbt models</span></div>
       </div>
       <div class="card lane rv d2">
-        <div class="dir" style="color:#7ee7d8">Checks as tools</div>
+        <div class="dir dir-t">Checks as tools</div>
         <h3>Ships with its own MCP server</h3>
         <p>Run the deterministic checks from CI or any agent — no skills required, zero dependencies, stdio.</p>
         <div class="chips"><span>spec_lint</span><span>vanity_scan</span></div>
@@ -459,6 +524,21 @@ footer a:hover{color:var(--ink)}
 </footer>
 
 <script>
+(function(){
+  var d=document.documentElement, btn=document.getElementById('mode'),
+      meta=document.querySelector('meta[name="theme-color"]');
+  function paint(){
+    var dark=d.dataset.theme!=='light';
+    btn.textContent=dark?'☀︎':'☾';
+    if(meta)meta.setAttribute('content',dark?'#0a0b10':'#f5f6fa');
+  }
+  btn.addEventListener('click',function(){
+    d.dataset.theme=d.dataset.theme==='light'?'dark':'light';
+    try{localStorage.setItem('actuals-theme',d.dataset.theme)}catch(e){}
+    paint();
+  });
+  paint();
+})();
 document.querySelectorAll('button.copy').forEach(function(b){
   b.addEventListener('click',function(){
     navigator.clipboard.writeText(b.dataset.copy).then(function(){
