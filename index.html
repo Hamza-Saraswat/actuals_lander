@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Actuals — your AI metrics are lying. Ship ones that aren't.</title>
-<meta name="description" content="A Claude Code plugin that writes a versioned measurement spec, audits your dashboards against 20 named vanity-metric anti-patterns, and generates the instrumentation to measure what's real.">
+<meta name="description" content="Agent skills for Claude Code, Codex, Cursor, Gemini CLI, OpenCode, and any Agent Skills tool: writes a versioned measurement spec, audits your dashboards against 20 named vanity-metric anti-patterns, and generates the instrumentation to measure what's real.">
 <meta name="theme-color" content="#0b0c0e">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230b0c0e'/%3E%3Cpath d='M7 17.5l5.5 5.5L25 10' stroke='%23f08a3c' stroke-width='3.5' fill='none'/%3E%3C/svg%3E">
 <script>
@@ -62,6 +62,10 @@ a:hover{color:var(--ink)}
 .hv6:hover{color:var(--ink)!important}
 .hv7:hover{background:var(--raise)!important}
 .hv8:hover{color:var(--ink)!important;border-color:var(--ink)!important}
+/* --- install tool tabs --- */
+.tab{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:8px 12px;border:1px solid var(--rule);background:transparent;color:var(--mut);cursor:pointer;white-space:nowrap}
+.tab:hover{border-color:var(--ink);color:var(--ink)}
+.tab.on{background:var(--true);border-color:var(--true);color:var(--btnink)}
 /* --- ledger reveal --- */
 .rv{opacity:0;transform:translateX(-14px)}
 #ledgerBody.is-revealed .rv{opacity:1;transform:none}
@@ -104,10 +108,10 @@ a:hover{color:var(--ink)}
 <header id="top" style="padding:84px var(--pad) 60px">
 <div style="display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)">
 <span style="width:6px;height:6px;background:var(--true);display:block"></span>
-<span>Free &amp; open source</span><span style="color:var(--rule)">/</span><span>MIT</span><span style="color:var(--rule)">/</span><span>Claude Code plugin</span>
+<span>Free &amp; open source</span><span style="color:var(--rule)">/</span><span>MIT</span><span style="color:var(--rule)">/</span><span>Works in 30+ agents</span>
 </div>
 <h1 style="margin-top:26px;font-family:var(--sans);font-weight:600;font-size:clamp(2.5rem,5.4vw,4.05rem);line-height:1.02;letter-spacing:-.037em;max-width:19ch">Your AI metrics are lying.<br><span style="color:var(--mut)">Ship ones that aren't.</span></h1>
-<p style="margin-top:26px;max-width:60ch;color:var(--mut);font-size:17.5px;line-height:1.55;text-wrap:pretty">Actuals is a Claude Code plugin that interviews you about your business, writes a versioned measurement spec, audits your dashboards against <strong style="color:var(--ink);font-weight:500">20 named vanity-metric anti-patterns</strong> — and generates the instrumentation to measure what's real.</p>
+<p style="margin-top:26px;max-width:60ch;color:var(--mut);font-size:17.5px;line-height:1.55;text-wrap:pretty">Actuals is a free plugin for Claude Code, Codex, Cursor, and 30+ other coding agents: it interviews you about your business, writes a versioned measurement spec, audits your dashboards against <strong style="color:var(--ink);font-weight:500">20 named vanity-metric anti-patterns</strong> — and generates the instrumentation to measure what's real.</p>
 <div style="margin-top:34px;display:flex;gap:10px;flex-wrap:wrap">
 <a class="hv4" href="#install" style="display:inline-flex;align-items:center;gap:9px;background:var(--true);color:var(--btnink);font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:14px 20px;border:1px solid var(--true)">Get the plugin — free →</a>
 <a class="hv5" href="https://github.com/Hamza-Saraswat/actuals" style="display:inline-flex;align-items:center;gap:9px;background:transparent;color:var(--ink);font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:14px 20px;border:1px solid var(--rule)">Star on GitHub ★</a>
@@ -352,16 +356,26 @@ a:hover{color:var(--ink)}
 </div>
 </div>
 <div style="padding:46px var(--pad) 56px">
-<h2 style="font-weight:600;font-size:clamp(1.6rem,3vw,2.25rem);letter-spacing:-.03em;line-height:1.1;max-width:24ch">Two commands in Claude Code</h2>
-<figure style="margin-top:28px;max-width:640px;border:1px solid var(--rule);background:var(--paper2)">
+<h2 style="font-weight:600;font-size:clamp(1.6rem,3vw,2.25rem);letter-spacing:-.03em;line-height:1.1;max-width:24ch">Get Actuals in your agent</h2>
+<p style="margin-top:14px;max-width:62ch;color:var(--mut);font-size:15.5px;text-wrap:pretty">Same five skills everywhere — Actuals follows the open <a href="https://agentskills.io" style="color:var(--true);border-bottom:1px solid var(--trueq)">Agent Skills</a> standard, so it installs into whichever agent you code with.</p>
+<div id="installTabs" role="tablist" aria-label="Choose your coding agent" style="margin-top:26px;display:flex;flex-wrap:wrap;gap:7px">
+<button class="tab on" type="button" data-tool="claude" onclick="selectTool('claude')">Claude Code</button>
+<button class="tab" type="button" data-tool="codex" onclick="selectTool('codex')">Codex</button>
+<button class="tab" type="button" data-tool="cursor" onclick="selectTool('cursor')">Cursor</button>
+<button class="tab" type="button" data-tool="vscode" onclick="selectTool('vscode')">VS Code</button>
+<button class="tab" type="button" data-tool="gemini" onclick="selectTool('gemini')">Gemini CLI</button>
+<button class="tab" type="button" data-tool="opencode" onclick="selectTool('opencode')">OpenCode</button>
+<button class="tab" type="button" data-tool="any" onclick="selectTool('any')">Anything else</button>
+</div>
+<figure style="margin-top:14px;max-width:640px;border:1px solid var(--rule);background:var(--paper2)">
 <figcaption style="display:flex;align-items:center;justify-content:space-between;padding:8px 8px 8px 13px;border-bottom:1px solid var(--rule2)">
-<span style="font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--dim)">claude</span>
+<span id="installLabel" style="font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--dim)">claude</span>
 <button class="hv3" type="button" onclick="copyInstall()" style="font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;background:transparent;color:var(--mut);border:1px solid var(--rule);padding:5px 9px"><span id="copyLabel">copy</span></button>
 </figcaption>
-<pre style="padding:16px 15px;font-family:var(--mono);font-size:12.5px;line-height:1.9;overflow-x:auto;color:var(--ink);white-space:pre"><span style="color:var(--true)">&gt;</span> <span style="color:var(--mut)">/plugin</span> marketplace add Hamza-Saraswat/actuals
+<pre id="installPre" style="padding:16px 15px;font-family:var(--mono);font-size:12.5px;line-height:1.9;overflow-x:auto;color:var(--ink);white-space:pre"><span style="color:var(--true)">&gt;</span> <span style="color:var(--mut)">/plugin</span> marketplace add Hamza-Saraswat/actuals
 <span style="color:var(--true)">&gt;</span> <span style="color:var(--mut)">/plugin</span> install actuals@actuals-marketplace<span style="color:var(--true);animation:blink 1.15s steps(1) infinite">&#9608;</span></pre>
 </figure>
-<p style="margin-top:18px;max-width:66ch;color:var(--mut);font-size:14.5px;line-height:1.6;text-wrap:pretty">Then just ask: <span style="font-family:var(--mono);font-size:13px;color:var(--ink)">"what should we measure for our new AI feature?"</span> — or hand it your dashboard and ask if the numbers are real.</p>
+<p id="installNote" style="margin-top:18px;max-width:66ch;color:var(--mut);font-size:14.5px;line-height:1.6;text-wrap:pretty">Then just ask: <span style="font-family:var(--mono);font-size:13px;color:var(--ink)">"what should we measure for our new AI feature?"</span> — or hand it your dashboard and ask if the numbers are real.</p>
 <div style="margin-top:28px;display:flex;gap:10px;flex-wrap:wrap">
 <button class="hv4" type="button" onclick="copyInstall('copyLabelCta')" style="display:inline-flex;align-items:center;gap:9px;background:var(--true);color:var(--btnink);font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:14px 20px;border:1px solid var(--true);cursor:pointer"><span id="copyLabelCta">Copy the install commands →</span></button>
 <a class="hv5" href="https://github.com/Hamza-Saraswat/actuals" style="display:inline-flex;align-items:center;gap:9px;background:transparent;color:var(--ink);font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:14px 20px;border:1px solid var(--rule)">Star on GitHub ★</a>
@@ -383,8 +397,31 @@ function toggleTheme(){
   document.getElementById('themeGlyph').textContent=next==='light'?'☾':'☀';
   try{localStorage.setItem('actuals-theme',next);}catch(e){}
 }
+var CURSOR_HTML='<span style="color:var(--true);animation:blink 1.15s steps(1) infinite">█</span>';
+var NPX_PRE='<span style="color:var(--true)">$</span> npx skills add Hamza-Saraswat/actuals';
+var NPX_CMD='npx skills add Hamza-Saraswat/actuals';
+function m(t){return '<span style="font-family:var(--mono);font-size:13px;color:var(--ink)">'+t+'</span>';}
+var TOOLS={
+  claude:{label:'claude',pre:'<span style="color:var(--true)">&gt;</span> <span style="color:var(--mut)">/plugin</span> marketplace add Hamza-Saraswat/actuals\n<span style="color:var(--true)">&gt;</span> <span style="color:var(--mut)">/plugin</span> install actuals@actuals-marketplace',copy:'/plugin marketplace add Hamza-Saraswat/actuals\n/plugin install actuals@actuals-marketplace',note:'Then just ask: '+m('"what should we measure for our new AI feature?"')+' — or hand it your dashboard and ask if the numbers are real.'},
+  codex:{label:'codex',pre:NPX_PRE,copy:NPX_CMD,note:'One command — it detects Codex and installs into '+m('.codex/skills/')+'. Then '+m('$audit')+' your dashboard, or just ask '+m('"are these numbers real?"')},
+  cursor:{label:'cursor',pre:NPX_PRE,copy:NPX_CMD,note:'Installs into '+m('.cursor/skills/')+'. Skills trigger on plain English — ask '+m('"are these numbers real?"')+' and the audit runs.'},
+  vscode:{label:'vs code · copilot',pre:NPX_PRE,copy:NPX_CMD,note:'Copilot reads '+m('.github/skills/')+'. In agent mode, ask '+m('"audit our AI metrics"')+' — no command needed.'},
+  gemini:{label:'gemini cli',pre:NPX_PRE,copy:NPX_CMD,note:'Installs into '+m('.gemini/skills/')+' — verify with '+m('/skills')+', then ask '+m('"are these numbers real?"')},
+  opencode:{label:'opencode',pre:NPX_PRE,copy:NPX_CMD,note:'Installs into '+m('.opencode/skills/')+'. Ask '+m('"audit our AI metrics"')+' and the skill runs.'},
+  any:{label:'any agent',pre:NPX_PRE,copy:NPX_CMD,note:'The <a href="https://github.com/vercel-labs/skills" style="color:var(--true);border-bottom:1px solid var(--trueq)">skills CLI</a> supports 75+ agents — it detects what you have installed and installs into each (universal dir: '+m('.agents/skills/')+').'}
+};
+var currentTool='claude';
+function selectTool(id){
+  var t=TOOLS[id];if(!t)return;
+  currentTool=id;
+  document.getElementById('installLabel').textContent=t.label;
+  document.getElementById('installPre').innerHTML=t.pre+CURSOR_HTML;
+  document.getElementById('installNote').innerHTML=t.note;
+  var tabs=document.querySelectorAll('#installTabs .tab');
+  for(var i=0;i<tabs.length;i++){tabs[i].classList.toggle('on',tabs[i].dataset.tool===id);}
+}
 function copyInstall(labelId){
-  var text='/plugin marketplace add Hamza-Saraswat/actuals\n/plugin install actuals@actuals-marketplace';
+  var text=TOOLS[currentTool].copy;
   var label=document.getElementById(labelId||'copyLabel');
   if(!label)return;
   var prev=label.textContent;
