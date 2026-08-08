@@ -364,9 +364,7 @@ a:hover{color:var(--ink)}
 <button class="tab" type="button" data-tool="cursor" onclick="selectTool('cursor')">Cursor</button>
 <button class="tab" type="button" data-tool="vscode" onclick="selectTool('vscode')">VS Code</button>
 <button class="tab" type="button" data-tool="gemini" onclick="selectTool('gemini')">Gemini CLI</button>
-<button class="tab" type="button" data-tool="opencode" onclick="selectTool('opencode')">OpenCode</button>
-<button class="tab" type="button" data-tool="any" onclick="selectTool('any')">Anything else</button>
-</div>
+<button class="tab" type="button" data-tool="opencode" onclick="selectTool('opencode')">OpenCode</button></div>
 <figure style="margin-top:14px;max-width:640px;border:1px solid var(--rule);background:var(--paper2)">
 <figcaption style="display:flex;align-items:center;justify-content:space-between;padding:8px 8px 8px 13px;border-bottom:1px solid var(--rule2)">
 <span id="installLabel" style="font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--dim)">claude</span>
@@ -407,8 +405,7 @@ var TOOLS={
   cursor:{label:'cursor',pre:NPX_PRE,copy:NPX_CMD,note:'Installs into '+m('.cursor/skills/')+'. Skills trigger on plain English — ask '+m('"are these numbers real?"')+' and the audit runs.'},
   vscode:{label:'vs code · copilot',pre:NPX_PRE,copy:NPX_CMD,note:'Copilot reads '+m('.github/skills/')+'. In agent mode, ask '+m('"audit our AI metrics"')+' — no command needed.'},
   gemini:{label:'gemini cli',pre:NPX_PRE,copy:NPX_CMD,note:'Installs into '+m('.gemini/skills/')+' — verify with '+m('/skills')+', then ask '+m('"are these numbers real?"')},
-  opencode:{label:'opencode',pre:NPX_PRE,copy:NPX_CMD,note:'Installs into '+m('.opencode/skills/')+'. Ask '+m('"audit our AI metrics"')+' and the skill runs.'},
-  any:{label:'any agent',pre:NPX_PRE,copy:NPX_CMD,note:'The <a href="https://github.com/vercel-labs/skills" style="color:var(--true);border-bottom:1px solid var(--trueq)">skills CLI</a> supports 75+ agents — it detects what you have installed and installs into each (universal dir: '+m('.agents/skills/')+').'}
+  opencode:{label:'opencode',pre:NPX_PRE,copy:NPX_CMD,note:'Installs into '+m('.opencode/skills/')+'. Ask '+m('"audit our AI metrics"')+' and the skill runs.'}
 };
 var currentTool='claude';
 function selectTool(id){
